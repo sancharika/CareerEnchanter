@@ -1,43 +1,103 @@
 # app.py
+import os
 import streamlit as st
-import pdfplumber
-import ats
-import docx
+from features import (ats, 
+                      analyzer, 
+                      company_recommend, 
+                      cover_letter, 
+                      enhance, 
+                      improve, 
+                      interview,
+                      linkedin,
+                      newresume,
+                      recommend, 
+                      review)
+from components import docLoader
+from dotenv import load_dotenv
+import google.generativeai as genai
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-st.set_page_config(page_title='CareerEnchanter', page_icon='🤖', layout='centered')
+load_dotenv()
+
+class CareerEnchanter(object):
+    def __init__(self, title="CareerEnchanter"):
+        self.title = title
+
+    @staticmethod
+    def model():
+        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+        return ChatGoogleGenerativeAI(model="gemini-pro")
+    
+enchanter = CareerEnchanter()
+st.set_page_config(page_title=enchanter.title, page_icon='🤖', layout='centered')
 
 st.title("Enchant your Career")
 
-uploaded_file = st.file_uploader("Choose a document file", type=["pdf", "txt", "csv", "docx"])
-text = ''
-if uploaded_file is not None:
-    st.write("File uploaded successfully!")
-
-    file_extension = uploaded_file.name.split(".")[-1]
-
-    if file_extension == "pdf":
-        with pdfplumber.open(uploaded_file) as pdf:
-            pages = pdf.pages
-            for page in pages:
-                text = page.extract_text()
-
-    elif file_extension == "txt":
-        text = uploaded_file.getvalue().decode("utf-8")
-    
-    elif file_extension == "docx":
-        docx_text = docx.Document(uploaded_file)
-        full_text = []
-        for para in docx_text.paragraphs:
-            full_text.append(para.text)
-        text = "\n".join(full_text)
-
-st.text_area("Extracted From Document",value=text)
+text = docLoader.load_doc()
 st.session_state['doc_text'] = text
+jd=st.text_area("Job Description: ",key="input")
+with st.sidebar:
+        st.title(' :blue[_Career Enchanter_] 🤖')
+        option = st.radio("Select an option: ", (
+            "ATS Score", 
+            "Resume Review", 
+            "Resume Enhancements", 
+            "Resume Improvements", 
+            "Recommendation", 
+            "Keywords", 
+            "Generate Cover Letter", 
+            "Resume Generator", 
+            "Linkedin Profile Update", 
+            "Posssible Interview Questions", 
+            "Company Recommendations"
+            ))
 
-col1, col2, col3 = st.columns([3, 3,3])
-option = st.radio("I want to use: ", ("ATS"), horizontal=True)
+        
+        if option == "ATS Score":
+            calculation_method = st.radio("Choose how you want to calculate ATS Score: ", ("Using AI", "Manually (Cosine Similarity)"), horizontal=True)
+
+        elif option == "Recommendation":
+            recommendation_type = st.radio("Select the type of recommendation you want: ", ("Entire Resume", "Section Wise"), horizontal=True)
+
+        elif option == "Keywords":
+            analyz_type = st.radio("Select the type of Keywords Fucntion you want: ", ("Analyse Keywords", "Keyword Synonyms"), horizontal=True)
+
+        with st.spinner("Loading Model..."):
+            llm = enchanter.model()
 
 
-if option == "ATS":
-    ats.run_ats(st.session_state['doc_text'])
-    
+# Create a dictionary mapping options to functions
+option_functions = {
+    "ATS Score": ats.run_ats,
+    "Resume Review": review.run_review,
+    "Resume Enhancements": enhance.run_enhance,
+    "Resume Improvements": improve.run_improve,
+    "Recommendation": recommend.run_recommend,
+    "Keywords": analyzer.run_analyzer,
+    "Generate Cover Letter": cover_letter.run_letter,
+    "Resume Generator": newresume.run_newresume,
+    "Linkedin Profile Update": linkedin.run_linkedin,
+    "Posssible Interview Questions": interview.run_interview,
+    "Company Recommendations": company_recommend.run_company
+}
+
+# Handle the selected option
+if option in option_functions:
+    func = option_functions[option]
+    if option == "ATS Score":
+        if calculation_method == "Manually (Cosine Similarity)":
+            func(llm, st.session_state['doc_text'], jd, manual=True)
+        else:
+            func(llm, st.session_state['doc_text'], jd)
+    elif option == "Recommendation":
+        if recommendation_type == "Entire Resume":
+            func(llm, st.session_state['doc_text'], jd, section=True)
+        else:
+            func(llm, st.session_state['doc_text'], jd)
+    elif option == "Keywords":
+        if analyz_type == "Analyse Keywords":
+            func(llm, st.session_state['doc_text'], jd, analysis=True)
+        else:
+            func(llm, st.session_state['doc_text'], jd)
+    else:
+        func(llm, st.session_state['doc_text'], jd)
