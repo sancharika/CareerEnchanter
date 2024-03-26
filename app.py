@@ -17,8 +17,10 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+# Load environment variables
 load_dotenv()
 
+# Initialize CareerEnchanter
 class CareerEnchanter(object):
     def __init__(self, title="CareerEnchanter"):
         self.title = title
@@ -27,46 +29,52 @@ class CareerEnchanter(object):
     def model():
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ChatGoogleGenerativeAI(model="gemini-pro")
-    
+
+# Initialize CareerEnchanter instance
 enchanter = CareerEnchanter()
-st.set_page_config(page_title=enchanter.title, page_icon='🤖', layout='centered')
 
-st.title("Enchant your Career")
+# Set Streamlit page configuration
+st.set_page_config(page_title=enchanter.title, page_icon='🤖', layout='wide')
 
+# Main title
+st.title("🚀 Career Enchanter 🚀")
+
+# Load document
 text = docLoader.load_doc()
 st.session_state['doc_text'] = text
-jd=st.text_area("Job Description: ",key="input")
-with st.sidebar:
-        st.title(' :blue[_Career Enchanter_] 🤖')
-        option = st.radio("Select an option: ", (
-            "ATS Score", 
-            "Resume Review", 
-            "Resume Enhancements", 
-            "Resume Improvements", 
-            "Recommendation", 
-            "Keywords", 
-            "Generate Cover Letter", 
-            "Resume Generator", 
-            "Linkedin Profile Update", 
-            "Posssible Interview Questions", 
-            "Company Recommendations"
-            ))
 
-        
-        if option == "ATS Score":
+# Job Description input
+jd = st.text_area("Job Description: ", key="input")
+
+# Sidebar options
+with st.sidebar:
+    st.title('🔮 Career Enchanter Options 🔮')
+    option = st.radio("Select an option: ", (
+        "ATS Score", 
+        "Resume Review", 
+        "Resume Enhancements", 
+        "Resume Improvements", 
+        "Recommendation", 
+        "Keywords", 
+        "Generate Cover Letter", 
+        "Resume Generator", 
+        "Linkedin Profile Update", 
+        "Possible Interview Questions", 
+        "Company Recommendations"
+        ))
+
+    # Load model
+    with st.spinner("Loading Model..."):
+        llm = enchanter.model()
+if option == "ATS Score":
             calculation_method = st.radio("Choose how you want to calculate ATS Score: ", ("Using AI", "Manually (Cosine Similarity)"), horizontal=True)
 
-        elif option == "Recommendation":
+elif option == "Recommendation":
             recommendation_type = st.radio("Select the type of recommendation you want: ", ("Entire Resume", "Section Wise"), horizontal=True)
 
-        elif option == "Keywords":
+elif option == "Keywords":
             analyz_type = st.radio("Select the type of Keywords Fucntion you want: ", ("Analyse Keywords", "Keyword Synonyms"), horizontal=True)
-
-        with st.spinner("Loading Model..."):
-            llm = enchanter.model()
-
-
-# Create a dictionary mapping options to functions
+# Dictionary mapping options to functions
 option_functions = {
     "ATS Score": ats.run_ats,
     "Resume Review": review.run_review,
@@ -77,7 +85,7 @@ option_functions = {
     "Generate Cover Letter": cover_letter.run_letter,
     "Resume Generator": newresume.run_newresume,
     "Linkedin Profile Update": linkedin.run_linkedin,
-    "Posssible Interview Questions": interview.run_interview,
+    "Possible Interview Questions": interview.run_interview,
     "Company Recommendations": company_recommend.run_company
 }
 

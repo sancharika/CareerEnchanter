@@ -101,8 +101,8 @@ resume_improve = """
     """
 
 resume_enhance = """
-    You are an experienced Technical Human Resource Manager,your task is to Provide specific suggestions in bullet points to tailor the resume to the job description from the provided paragraph. 
-    Please share your professional suggestions on what to write and how to write the given pargraph so that the candidate's profile aligns with the role. 
+    You are an experienced Technical Human Resource Manager, your task is to Provide specific suggestions in bullet points to tailor the resume to the job description from the provided paragraph. 
+    Please share your professional suggestions on what to write and how to write the given paragraph so that the candidate's profile aligns with the role. 
     Highlight weaknesses of the applicant in relation to the specified job requirements and provide sugestions on how to enhance it and make it strength.
 
     Job Description: {input_text}

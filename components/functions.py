@@ -7,6 +7,7 @@ import re
 import numpy as np
 import numpy as np
 import torch
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from transformers import BertTokenizer, BertModel
@@ -56,6 +57,12 @@ class Functions():
 
     @staticmethod
     def calculate_ats_score(resume_data, job_description):
+        # Download NLTK stopwords if not already downloaded
+        try:
+            stopwords.words('english')
+        except LookupError:
+            nltk.download('stopwords')
+
         def preprocess_text(text):
             text = text.lower()
             stop_words = set(stopwords.words('english'))
