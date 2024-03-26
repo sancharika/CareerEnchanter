@@ -62,6 +62,8 @@ class Functions():
             stopwords.words('english')
         except LookupError:
             nltk.download('stopwords')
+            nltk.download('punkt')
+
 
         def preprocess_text(text):
             text = text.lower()
