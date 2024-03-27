@@ -7,7 +7,7 @@ from components.prompts import company_recommendations
 
 
 
-def run_company(llm,doc='',jd=''):
+def run_company(llm,doc='',jd='', role=''):
     load_dotenv()
     company = Functions()
     st.write("Suggesting new New Job Oppertunities based your resume")

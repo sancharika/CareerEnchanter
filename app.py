@@ -51,6 +51,10 @@ with jd:
 if text: 
     with doc:
         extracted= st.text_area("Extracted Data From Resume", value=st.session_state['doc_text'])
+
+role=st.text_input("Role you want to Apply for")
+st.session_state['role'] = role
+
 # Sidebar options
 with st.sidebar:
     st.title('🔮 Career Enchanter 🔮')
@@ -114,4 +118,4 @@ if option in option_functions:
         else:
             func(llm, st.session_state['doc_text'], jd)
     else:
-        func(llm, st.session_state['doc_text'], jd)
+        func(llm, st.session_state['doc_text'], jd, role=st.session_state['role'])

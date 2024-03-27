@@ -5,11 +5,10 @@ from components.functions import Functions
 import streamlit as st
 from components.prompts import resume_review
 
-def run_review(llm,doc='',jd=''):
+def run_review(llm,doc='',jd='', role=''):
     load_dotenv()
     review = Functions()
     st.write("Get a review on how well your Resume is")
-    role=st.text_input("Role you want to Review for")
     submit = st.button("Tell Me About the Resume")
     
     if submit:

@@ -7,7 +7,7 @@ from components.prompts import resume_enhance
 
 
 
-def run_enhance(llm,doc='',jd=''):
+def run_enhance(llm,doc='',jd='', role=''):
     load_dotenv()
     enhance = Functions()
     st.write("Providing bullet points for enhancing the given paragraph.")

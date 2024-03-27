@@ -7,7 +7,7 @@ from components.prompts import resume_improve
 
 
 
-def run_improve(llm,doc='',jd=''):
+def run_improve(llm,doc='',jd='', role=''):
     load_dotenv()
     improve = Functions()
     st.write("Suggesting new elements to add to your resume based on the existing content.")

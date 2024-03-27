@@ -7,7 +7,7 @@ from components.prompts import linkedin_profile
 
 
 
-def run_linkedin(llm,doc='',jd=''):
+def run_linkedin(llm,doc='',jd='', role=''):
     load_dotenv()
     linkedin = Functions()
     st.write("Suggesting Comprehensive LinkedIn Profile.")

@@ -7,11 +7,10 @@ from components.prompts import interview as  interview_prompt
 
 
 
-def run_interview(llm,doc='',jd=''):
+def run_interview(llm,doc='',jd='', role=''):
     load_dotenv()
     interview = Functions()
     st.write("Generate Customized Interview Questions.")
-    role=st.text_input("Role you want to know questions for")
     submit = st.button("Generate Interview Questions")
     
     

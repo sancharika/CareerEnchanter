@@ -7,11 +7,10 @@ from components.prompts import cover_letter
 
 
 
-def run_letter(llm,doc='',jd=''):
+def run_letter(llm,doc='',jd='', role=''):
     load_dotenv()
     letter = Functions()
     st.write("Generate a cover letter based on your resume and Provided Job Description.")
-    role=st.text_input("Role you want the cover letter for")
     submit = st.button("Generate Cover Letter")
     
     

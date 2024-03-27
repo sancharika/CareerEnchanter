@@ -9,7 +9,7 @@ class docLoader():
 
     def load(self, uploaded_file):
         if uploaded_file is not None:
-            st.write("File uploaded successfully!")
+            st.toast("File uploaded successfully!", icon="✅")
 
             file_extension = uploaded_file.name.split(".")[-1]
 
