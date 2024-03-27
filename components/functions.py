@@ -95,5 +95,8 @@ class Functions():
         job_desc_embeddings = get_bert_embeddings(job_desc)
         similarity_score = calculate_cosine_similarity(resume_embeddings, job_desc_embeddings)
         missing_keywords = [word for word in word_tokenize(job_desc) if word not in word_tokenize(resume)]
+        if len(missing_keywords) == 0 :
+            missing_keywords = ['Congratualitions, All the keywords match with your resume!!']
+        print(missing_keywords)
         return str(round(similarity_score * 100, 2)), missing_keywords
 

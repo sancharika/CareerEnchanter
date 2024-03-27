@@ -22,7 +22,6 @@ class docLoader():
 
             if file_extension in load_functions:
                 text = load_functions[file_extension](uploaded_file)
-                st.text_area("Extracted From Document", value=text)
             else:
                 st.write("Unsupported file format")
 

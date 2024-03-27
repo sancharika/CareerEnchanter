@@ -15,15 +15,17 @@ def run_ats(llm, doc='', jd='', manual=False):
             with st.spinner("Calculating Score..."):
                 if manual:
                     response, keywords = ats.calculate_ats_score(resume_data=doc, job_description=jd)
-                    st.subheader("The Keywords Missing:")
-                    for i, keyword in enumerate(keywords):
-                        st.caption(f"{i+1}. {keyword}")
+                    
                 else:
                     response = ats.get_gemini_response(llm=llm, template=ats_score, doc=doc, input_text=jd)
                 extra_response = ats.get_gemini_response(llm=llm, template=ats_resume, doc=doc, input_text=jd)
                 
                 st.subheader("The ATS Score is")
                 st.write(response)
+                if manual:
+                    st.subheader("The Keywords Missing:")
+                    for i, keyword in enumerate(keywords):
+                        st.caption(f"{i+1}. {keyword}")
                 st.write(extra_response)
         else:
             st.write("Please upload the resume")

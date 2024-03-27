@@ -1,6 +1,6 @@
 resume_review = """
-    You are an experienced Technical Human Resource Manager,your task is to review the provided resume against the job description. 
-    Please share your professional evaluation on whether the candidate's profile aligns with the role. 
+    You are an experienced Technical Human Resource Manager, task is to review the provided resume against the job description. 
+    Please share  professional evaluation on whether the candidate's profile aligns with the role. 
     Highlight the strengths and weaknesses of the applicant in relation to the specified job requirements.
 
     Human-Like Resume Review for {info}
@@ -52,7 +52,7 @@ ats_resume = """
 
 ats_score = """
     You are an skilled ATS (Applicant Tracking System) scanner with a deep understanding of data science and ATS functionality, 
-    your task is to evaluate the resume against the provided job description. give me the percentage of match if the resume matches
+     task is to evaluate the resume against the provided job description. give me the percentage of match if the resume matches
     the job description. First the output should come as percentage and then keywords missing.
 
     Job Description: {input_text}
@@ -101,17 +101,26 @@ resume_improve = """
     """
 
 resume_enhance = """
-    You are an experienced Technical Human Resource Manager, your task is to Provide specific suggestions in bullet points to tailor the resume to the job description from the provided paragraph. 
-    Please share your professional suggestions on what to write and how to write the given paragraph so that the candidate's profile aligns with the role. 
-    Highlight weaknesses of the applicant in relation to the specified job requirements and provide sugestions on how to enhance it and make it strength.
+* Job Description: {input_text}
+* Resume: {doc}
+* Paragraph: {info}
 
-    Job Description: {input_text}
-    Resume: {doc}
-    paragraph: {info}
+You are an experienced Technical Human Resource Manager, your task is to Provide bullet points from the given paragraph whcih also has some numerical value to quantify it to tailor the resume to the job description. 
+  Please share your professional suggestions on what to write and how to write the given paragraph so that the candidate's profile aligns with the role. 
+  Highlight weaknesses of the applicant in relation to the specified job requirements and provide sugestions on how to enhance it and make it strength. the outptut will have maximum 5 bullet points converted from given paragraph which have numerical values to quantify 
+
+Output:
+## Bullet Points:
+- Maximum 5 bullet points generated from the given paragraph with some numerical value
+
+## Keywords can be added:
+- Add keywords related to the job description into each bullet point
+- Show Top % keywords to be added from job description
+
     """
 
 resume_recommendation = """
-You are an experienced Technical Human Resource Manager,your task is to Provide specific recommendations to tailor the resume to the job description. 
+You are an experienced Technical Human Resource Manager, task is to Provide specific recommendations to tailor the resume to the job description. 
 Suggest possible next steps, certifications, courses or experiences the person could do. 
 Make sure the suggestions are all FACTUALLY ACCURATE given the original resume and specify 
 which suggestions require further action. Mention where resume is good and where resume lacks. FOR EVERY CHANGE YOU SUGGEST, PROVIDE A SIMPLE EXPLANATION 
@@ -122,8 +131,8 @@ Resume: {doc}
 """
 
 recommendation_section = """
-You are an experienced Technical Human Resource Manager,your task is to Provide specific recommendations to tailor the resume to the job description. 
-    Please share your professional recommendations on what to write and how to write the given pargraph so that the candidate's profile aligns with the role. 
+You are an experienced Technical Human Resource Manager, task is to Provide specific recommendations to tailor the resume to the job description. 
+    Please share  professional recommendations on what to write and how to write the given pargraph so that the candidate's profile aligns with the role. 
     Talk about each section of user's resume and talk good and bad points of it. Recommend how to modify it better.
 
 Job Description: {input_text}
@@ -151,58 +160,78 @@ Keyword: {info}
 """
 
 resume_update = """
-## Writing an Updated Resume which is ATS friendly in latex format
 
-### Step-by-Step Guide for the Updated Resume
+Job Description: {input_text}
+Resume: {doc}
+This guide will walk you through creating a compelling resume optimized for Applicant Tracking Systems (ATS) using LaTeX. 
 
-#### 1. Header
-- **Full Name**
-- **Contact Information:** Phone number, Email address, LinkedIn profile (if applicable)
-- **Location:** City, State (optional, depending on privacy preferences)
+### Step-by-Step Guide To update resume
 
-#### 2. Professional Summary
-- Craft a 2-3 sentence summary focusing on key qualifications and alignment with the target job description.
+**1. Header:**
 
-#### 3. Skills
-- List skills that are relevant to the job description. 
-- Use bullet points and ensure to include keywords from the job description for ATS optimization.
+- Include  **Full Name** in a prominent font size.
+- Provide  **Contact Information:** Phone number, Email address, and LinkedIn profile URL (optional).
+- Mention  **Location** (City, State) if comfortable.
 
-#### 4. Professional Experience
+**2. Professional Summary:**
+
+- Craft a concise 2-3 sentence summary highlighting  key qualifications and aligning them with the target job description.
+
+**3. Skills:**
+
+- List relevant skills using bullet points, emphasizing keywords from the job description to optimize for ATS.
+
+**4. Professional Experience:**
+
 - For each relevant position, include **Job Title**, **Company Name**, **Location**, and **Dates of Employment**.
-- Under each role, list bullet points that detail responsibilities and achievements, emphasizing quantifiable outcomes and incorporating job description keywords.
+- Under each role, detail  responsibilities and achievements using bullet points. Emphasize quantifiable results and incorporate keywords from the job description.
 
-#### 5. Education
-- List degrees obtained, including **Degree Title**, **Institution Name**, **Location**, and **Graduation Date**.
-- Add relevant coursework or projects if they align with the job description.
+**5. Education:**
 
-#### 6. Certifications (Optional)
-- Include certifications relevant to the job description.
+- List  degrees, including **Degree Title**, **Institution Name**, **Location**, and **Graduation Date**.
+- Include relevant coursework or projects that align with the job description (optional).
 
-#### 7. Additional Sections (Optional)
-- Sections like Volunteer Experience, Publications, or Awards can be added if they are relevant to the job and add value.
+**6. Certifications (Optional):**
 
-#### 8. ATS Compatibility and Formatting
-- Ensure the resume format is simple with a standard, easy-to-read font like Arial or Times New Roman.
+- List certifications relevant to the job description.
+
+**7. Additional Sections (Optional):**
+
+- Consider including sections like Volunteer Experience, Publications, or Awards if they demonstrate  skills and value.
+
+**8. ATS Compatibility and Formatting:**
+
+- Maintain a simple format with a standard, easy-to-read font (e.g., Arial, Times New Roman).
 - Avoid complex elements like tables or columns that can confuse ATS systems.
 
-#### 9. Final Review
-- Proofread for any spelling or grammatical errors.
-- Check alignment with the job description and ensure all important keywords are included.
+**9. Final Review:**
 
-### Conclusion:
-- Provide a brief summary highlighting the key changes made to the resume and how they align with the target job description.
-- Offer suggestions for any additional improvements or steps the candidate can take to further tailor their resume for similar roles in the future.
+- Proofread meticulously for any spelling or grammatical errors.
+- Ensure  resume aligns with the job description and includes essential keywords.
 
-### Example
+## Writing an Updated, ATS-Friendly Resume
+**Generated Resume:**
 
-- Create a new resume in the given LaTeX format.
+Based on the provided job description and resume data, here's an example resume tailored for  target role:
 
-**Job Description:** {input_text}
-
-**Resume data:** {doc}
-
-The output should be first show step by step guide for updated resume after that generate new resume based on provided information
-and then also add the latex format of the generated resume .
+**[ Name]**
+* [Phone Number] | [Email Address] | [LinkedIn Profile URL (Optional)]
+* [City, State (Optional)]
+**Professional Summary**
+(Here, write concise and compelling 2-3 sentence summary)
+**Skills**
+* (List relevant skills using bullet points, emphasizing keywords from the job description)
+**Professional Experience**
+**[Job Title 1]** | **[Company Name]** | **[Location]** | **[Dates of Employment]**
+* (List bullet points outlining  responsibilities and achievements using the job description keywords and quantifiable results)
+**[Job Title 2]** | **[Company Name]** | **[Location]** | **[Dates of Employment]**
+* (List bullet points outlining  responsibilities and achievements using the job description keywords and quantifiable results)
+**Education**
+**[Degree Title]** | **[Institution Name]** | **[Location]** | **[Graduation Date]**
+* (Include relevant coursework or projects if applicable)
+**[Optional Sections: Certifications, Volunteer Experience, Publications, Awards]**
+**(Fill out these sections if relevant)**
+Output: Step-by-Step guide then generated new resume
 """
 
 #info contains company name also
@@ -212,7 +241,7 @@ Job Description: {input_text}
 Resume: {doc}
 ### Step-by-Step Guide for the Cover Letter
 #### 1. Contact Information and Date
-- Include your contact information at the top: Name, Address (optional), Phone Number, Email.
+- Include  contact information at the top: Name, Address (optional), Phone Number, Email.
 - Add the date of writing the letter.
 #### 2. Salutation
 - If possible, address the letter to a specific person (e.g., "Dear [Hiring Manager's Name]").
@@ -222,21 +251,21 @@ Resume: {doc}
 - Mention the job title you’re applying for and where you found the job listing.
 - Briefly state why you are interested in the role and the company.
 #### 4. Body of the Letter (1-2 Paragraphs)
-- In the first paragraph, summarize your relevant experience and skills, aligning them with key requirements of the job description.
-- In the second paragraph, provide specific examples from your past work that demonstrate your abilities and successes. Use quantifiable achievements when possible.
-- Explain how your skills and experiences make you an ideal fit for the role and how you can contribute to the company.
+- In the first paragraph, summarize  relevant experience and skills, aligning them with key requirements of the job description.
+- In the second paragraph, provide specific examples from  past work that demonstrate  abilities and successes. Use quantifiable achievements when possible.
+- Explain how  skills and experiences make you an ideal fit for the role and how you can contribute to the company.
 #### 5. Conclusion
-- Reiterate your enthusiasm for the position.
-- Mention any attached documents (like your resume or portfolio).
-- State your availability for an interview and propose the next steps or indicate your intention to follow up.
+- Reiterate  enthusiasm for the position.
+- Mention any attached documents (like  resume or portfolio).
+- State  availability for an interview and propose the next steps or indicate  intention to follow up.
 #### 6. Sign-off
-- Close the letter with a professional sign-off such as "Sincerely" or "Best regards," followed by your name.
-- If you’re submitting a printed letter, leave space for your handwritten signature above your typed name.
+- Close the letter with a professional sign-off such as "Sincerely" or "Best regards," followed by  name.
+- If you’re submitting a printed letter, leave space for  handwritten signature above  typed name.
 ### Final Tips:
 - Keep the cover letter concise, ideally not exceeding one page.
 - Tailor the letter to the job and company – avoid using a generic template.
 - Proofread carefully to avoid any spelling or grammatical errors.
-- Use a professional tone, but allow your personality to shine through.
+- Use a professional tone, but allow  personality to shine through.
 ## Example:
 - Provide an cover letter also as example
 """
@@ -247,35 +276,35 @@ Job Description: {input_text}
 Resume: {doc}
 ### Step-by-Step Guide for LinkedIn Update
 #### 1. LinkedIn Headline
-- Create a headline combining your current role or expertise, key skills from your resume, and aspects of the job you are targeting.
+- Create a headline combining  current role or expertise, key skills from  resume, and aspects of the job you are targeting.
 - Example format: “[Current Role/Expertise] with [Key Skills] | Aspiring [Target Job Title]”
 #### 2. Profile Photo and Background Image
-- Choose a professional profile picture and a background image that reflects your professional brand.
+- Choose a professional profile picture and a background image that reflects  professional brand.
 #### 3. About Section
-- Write a summary that includes your professional background, achievements, skills, and career aspirations, tailored to align with your resume and the job description.
+- Write a summary that includes  professional background, achievements, skills, and career aspirations, tailored to align with  resume and the job description.
 #### 4. Experience Section
-- Update to mirror your resume, highlighting roles, responsibilities, and achievements relevant to your career goals.
+- Update to mirror  resume, highlighting roles, responsibilities, and achievements relevant to  career goals.
 - Use language and keywords from the job description to Improve alignment.
 #### 5. Education
-- Ensure your educational background matches your resume, including relevant courses and certifications.
+- Ensure  educational background matches  resume, including relevant courses and certifications.
 #### 6. Skills & Endorsements
-- Add and prioritize skills from your resume and the job description, focusing on those most relevant to your career goals.
+- Add and prioritize skills from  resume and the job description, focusing on those most relevant to  career goals.
 #### 7. Recommendations
-- Request recommendations that reinforce your skills and experiences, particularly those aligning with your target job.
+- Request recommendations that reinforce  skills and experiences, particularly those aligning with  target job.
 #### 8. Licenses and Certifications
-- Include any relevant certifications, aligning with both your resume and job description.
+- Include any relevant certifications, aligning with both  resume and job description.
 #### 9. Volunteer Experience
-- Add volunteer work if it supports your professional image and career objectives.
+- Add volunteer work if it supports  professional image and career objectives.
 #### 10. Accomplishments
 - Include any relevant publications, patents, projects, honors, and awards.
 #### 11. Customized URL
-- Customize your LinkedIn URL for a professional touch.
+- Customize  LinkedIn URL for a professional touch.
 ### Final Steps:
 - Review for consistency in language and tone.
 - Proofread to ensure there are no errors.
-- Update your profile regularly to reflect your current professional status and aspirations.
+- Update  profile regularly to reflect  current professional status and aspirations.
 ### Conclusion:
-- Your LinkedIn profile should be a dynamic representation of your professional life, showcasing both your experience and personality, and aligned with your career goals and targeted job opportunities.
+-  LinkedIn profile should be a dynamic representation of  professional life, showcasing both  experience and personality, and aligned with  career goals and targeted job opportunities.
 """
 
 interview = """
@@ -286,7 +315,7 @@ Role: {info}
 ### Part 1: Tailored Interview Questions Based on Job Description
 #### 1. Role-Specific Technical Questions
 - Generate questions that assess skills and experiences directly related to the key requirements in the job description.
-- Example: "Your resume mentions experience in [specific skill from resume]; can you discuss how you've applied this skill in a past project?"
+- Example: " resume mentions experience in [specific skill from resume]; can you discuss how you've applied this skill in a past project?"
 #### 2. Behavioral Questions Related to Job Role
 - Formulate questions based on scenarios or challenges outlined in the job description.
 - Example: "The job description emphasizes teamwork. Can you share an experience where you successfully collaborated on a challenging project?"
@@ -295,7 +324,7 @@ Role: {info}
 - Example: "Given a scenario of [specific challenge in the job description], how would you approach solving it?"
 #### 4. Questions Assessing Cultural and Company Fit
 - Based on the company culture hinted at in the job description, prepare questions to evaluate the candidate's fit.
-- Example: "Our company values [specific value from job description]. Can you provide an example of how you've embodied this value in your professional life?"
+- Example: "Our company values [specific value from job description]. Can you provide an example of how you've embodied this value in  professional life?"
 ### Part 2: Questions for the Candidate to Ask the Interviewer
 #### 1. Clarifications on Role Responsibilities
 - Suggest questions that seek deeper insights into the daily responsibilities and expectations.

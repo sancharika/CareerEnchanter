@@ -7,7 +7,7 @@ import streamlit as st
 def run_analyzer(llm, doc='', jd='', analysis=False):
     load_dotenv()
     analyzer = Functions()
-    
+    keyword = ''
     if analysis:
         message = "Suggesting Keywords to add in your Resume."
         template = keyword_analysis

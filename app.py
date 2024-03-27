@@ -43,12 +43,18 @@ st.title("🚀 Career Enchanter 🚀")
 text = docLoader.load_doc()
 st.session_state['doc_text'] = text
 
-# Job Description input
-jd = st.text_area("Job Description: ", key="input")
+jd, doc = st.columns(2)
 
+with jd:
+    # Job Description input
+    jd = st.text_area("Job Description: ", key="input")
+if text: 
+    with doc:
+        extracted= st.text_area("Extracted Data From Resume", value=st.session_state['doc_text'])
 # Sidebar options
 with st.sidebar:
-    st.title('🔮 Career Enchanter Options 🔮')
+    st.title('🔮 Career Enchanter 🔮')
+    st.subheader('Options: ')
     option = st.radio("Select an option: ", (
         "ATS Score", 
         "Resume Review", 

@@ -8,14 +8,14 @@ from components.prompts import resume_update
 def run_newresume(llm,doc='',jd=''):
     load_dotenv()
     newresume = Functions()
-    st.write("Generate new resume in LateX Format.")
+    st.write("Generate New Resume.")
     submit = st.button("Generate Resume")    
     
     if submit:
         if doc is not None:
             with st.spinner("Generating..."):
                 response=newresume.get_gemini_response(llm=llm,template=resume_update,doc=doc,input_text=jd)
-            st.subheader("Resume In LateX Format")
+            st.subheader("Generated Resume")
             st.write(response)
         else:
             st.write("Please upload the resume")
