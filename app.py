@@ -44,7 +44,6 @@ text = docLoader.load_doc()
 st.session_state['doc_text'] = text
 
 jd, doc = st.columns(2)
-
 with jd:
     # Job Description input
     jd = st.text_area("Job Description: ", key="input")
