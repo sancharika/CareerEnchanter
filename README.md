@@ -11,7 +11,7 @@ pinned: false
 
 # Career Enchanter 🚀
 
-Welcome to Career Enchanter, your ultimate AI companion for job hunting! With a plethora of features designed to enhance your job search experience, Career Enchanter is here to revolutionize the way you approach your career goals. 
+Welcome to Career Enchanter, your ultimate AI companion for job hunting! With a plethora of features designed to enhance your job search experience, Career Enchanter is here to revolutionize the way you approach your career goals. [Try it OUT!!](https://huggingface.co/spaces/sancharikadebnath/CareerEnchanter)
 
 ## Features Galore 🎉
 
